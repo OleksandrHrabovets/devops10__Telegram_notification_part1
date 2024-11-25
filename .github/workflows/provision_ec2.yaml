@@ -39,7 +39,7 @@ jobs:
           echo "TERRAFORM_STATUS=$[[ '${{ steps.apply.outcome }}' == 'success' ]] && echo '✅ Success' || echo '❌ Failed'" >> $GITHUB_ENV
           echo "TERRAFORM_ERRORS=$[[ '${{ steps.apply.outcome }}' != 'success' ]] && echo '{{ steps.apply.outputs }}' || echo ''" >> $GITHUB_ENV
       - name: Send Telegram Notification
-        if: always
+        if: always()
         uses: cbrgm/telegram-github-action@v1
         with:
           token: ${{ secrets.TELEGRAM_TOKEN }}
