@@ -47,5 +47,5 @@ jobs:
           message: |
             *GitHab Actions CI Results*:
             *Step name*: Terraform Apply
-            *Status*: {{ env.TERRAFORM_STATUS }}
-            Errors: {{ env.TERRAFORM_ERRORS }}
+            *Status*: ${{ env.TERRAFORM_STATUS }}
+            Errors: ${{ env.TERRAFORM_ERRORS }}
