@@ -36,8 +36,8 @@ jobs:
       - name: Collect status
         id: collect_status
         run: |
-          echo "TERRAFORMSTATUS=$([[ '${{ steps.apply.outcome }}' == 'success' ]] && echo '✅ Success' || echo '❌ Failed')" >> $GITHUB_ENV
-          echo "TERRAFORMERRORS=$([[ '${{ steps.apply.outcome }}' != 'success' ]] && echo '{{ steps.apply.outputs }}' || echo '')" >> $GITHUB_ENV
+          echo "TERRAFORM_STATUS=$([[ '${{ steps.apply.outcome }}' == 'success' ]] && echo '✅ Success' || echo '❌ Failed')" >> $GITHUB_ENV
+          echo "TERRAFORM_ERRORS=$([[ '${{ steps.apply.outcome }}' != 'success' ]] && echo '{{ steps.apply.outputs }}' || echo '')" >> $GITHUB_ENV
       - name: Send Telegram Notification
         if: always()
         uses: cbrgm/telegram-github-action@v1
@@ -47,5 +47,5 @@ jobs:
           message: |
             *GitHab Actions CI Results*:
             *Step name*: Terraform Apply
-            *Status*: $TERRAFORMSTATUS
-            Errors: $TERRAFORMERRORS
+            *Status*: {{ env.TERRAFORM_STATUS }}
+            Errors: {{ env.TERRAFORM_ERRORS }}
